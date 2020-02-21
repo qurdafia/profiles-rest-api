@@ -1,49 +1,51 @@
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework import viewsets
+from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
 from profiles_api import serializers
+from profiles_api import models
+from profiles_api import permissions
+
+from .forms import GuestForm
+from django.shortcuts import redirect
+from django.contrib import messages
+
 
 # Create your views here.
-class HelloApiView(APIView):
-    """Test API View"""
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating and update profiles"""
 
-    serializer_class = serializers.HelloSerializers
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'nric_number',)
 
-    def get(self, request, format=None):
-        """Returns a list of APIView features"""
-        an_apiview = [
-            'Uses HTTP method as function (get, post, patch, put, delete)',
-            'Is similar to a traditional Django View',
-            'Gives you the most control over your application logic',
-            'Is mapped manually to URLs',
-        ]
 
-        return Response({'message': 'Hello!', 'an_apiview': an_apiview})
+class UserLoginApiView(ObtainAuthToken):
+    """Handle user authentication token"""
 
-    def post(self, request):
-        """Create a hello message with name"""
-        serializer = self.serializer_class(data=request.data)
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
-        if serializer.is_valid():
-            name = serializer.validated_data.get('name')
-            message = f'Hello, {name}'
-            return Response({'message': message})
-        else:
-            return Response(
-                serializer.errors,
-                status=status.HTTP_400_BAD_REQUEST
-            )
 
-    def put(self, request, pk=None):
-        """Handle updating an object"""
-        return Response({'method': 'PUT'})
+# Registering a guest
+def register_guest(request):
+    if request.method == 'POST':
+        form = GuestForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Guest is registered successfully!')
+            return redirect('register_guest')
+    else:
+        form = GuestForm()
 
-    def patch(self, request, pk=None):
-        """Handle updating an object"""
-        return Response({'method': 'PATCH'})
-
-    def delete(self, request, pk=None):
-        """Handle updating an object"""
-        return Response({'method': 'DELETE'})
+    return render(request, 'register_guest.html', {
+        'form': form
+    })

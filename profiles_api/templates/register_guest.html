@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>Enter guest's information below to register.</h3>
+  <br />
+  <form id="guest-registration" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="id_name">Name:</label><br />
+    <input type="text" name="name" maxlength="255" required="" id="id_name"><br />
+    <label for="id_company">Company:</label><br />
+    <input type="text" name="company" maxlength="255" required="" id="id_company"><br />
+    <label for="id_nric_number">Nric number:</label><br />
+    <input type="text" name="nric_number" maxlength="255" required="" id="id_nric_number"><br />
+    <label for="id_photo">Photo:</label><br />
+    <div class="access-camera">
+      <!-- Access the camera -->
+      <span id="open-web-cam">Open Camera</span>
+      <button data-toggle="modal" data-target="#myModal" id="webcam-open-button" type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+      </button>
+      <!-- End of Access Camera -->
+      <input style="cursor: pointer !important; padding-top: 0 !important;" type="file" name="photo" required="" id="id_photo">
+    </div>
+    <p>&nbsp;</p>
+    <button id="reg-submit" type="submit">Register</button>
+  </form>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Image Capture</h4>
+        </div>
+        <div class="modal-body">
+          <video width="100%" id="vid-show" autoplay></video><br />
+          <input id="vid-take" type="button" value="Take Photo"/>
+          <div id="vid-canvas"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+{% endblock %}
