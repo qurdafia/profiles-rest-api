@@ -23,9 +23,20 @@ body {
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 50px;
-  font-family: Open Sans;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  /*font-family: Open Sans;*/
   font-weight: lighter !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+@media (max-width: 600px) {
+  .container {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 .navbar {
   border-top: 5px solid #2e2e2e;
@@ -86,6 +97,20 @@ body {
   font-size: 10px;
   font-weight: 600;
 }
+.messages {
+  padding-inline-start: 0 !important;
+}
+#reg-message-success {
+  list-style-type: none;
+  border: 1px solid #f33;
+  color: #f33;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 20px;
+}
 .access-camera {
   display: flex;
 
@@ -93,6 +118,32 @@ body {
 .btn-info {
   border: none;
 }
+
+/* NRIC Validation */
+
+#id_nric_number {
+
+}
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.validateicon {
+   display: inline-block;
+}
+.validateicon::after {
+  content: "✕";
+  color: #ff0000;
+
+}
+.valid::after {
+  content: "✓";
+  color: #00ff00;
+}
+
 </style>
 <body>
 <div class="container">
@@ -114,6 +165,8 @@ body {
   {% block content %}
   {% endblock content %}
 </div>
+</body>
+
 <script>
     window.addEventListener("load", function(){
     // [1] GET ALL THE HTML ELEMENTS
@@ -157,4 +210,3 @@ body {
     });
   });
 </script>
-</body>

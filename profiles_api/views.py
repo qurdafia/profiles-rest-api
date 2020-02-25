@@ -41,6 +41,7 @@ def register_guest(request):
         form = GuestForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            print(form.cleaned_data.get('nric_number'))
             messages.success(request, 'Guest is registered successfully!')
             return redirect('register_guest')
     else:
