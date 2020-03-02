@@ -41,6 +41,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     photo = models.FileField(upload_to='photos/', default='')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_pdpa_checked = models.BooleanField(default=False)
     reg_date = models.DateField(default=timezone.now)
 
     objects = UserProfileManager()

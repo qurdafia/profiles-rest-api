@@ -8,9 +8,8 @@
     <input type="text" name="name" maxlength="255" required id="id_name" onchange="unlockFile()"><br />
     <label for="id_company">Company:</label><br />
     <input type="text" name="company" maxlength="255" required id="id_company"><br />
-    <label for="id_nric_number">Nric / FIN:</label><br />
+    <label for="id_nric_number">Nric / FIN:</label>&nbsp;<div id="validateIcon" class="validateicon"></div><br />
     <input type="text" name="nric_number" maxlength="255" required id="id_nric_number"><br />
-    <div id="validateIcon" class="validateicon"></div><br /><br />
     <label for="id_photo">Photo:</label><br />
     <div class="access-camera">
       <!-- Access the camera -->
@@ -20,6 +19,16 @@
       </button>
       <!-- End of Access Camera -->
       <input style="cursor: pointer !important; padding-top: 0 !important;" type="file" name="photo" required id="id_photo">
+    </div>
+    <p>&nbsp;</p>
+    <p>
+      I acknowledge that I have read and understood the <a target="_blank" href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/Personal-Data-Protection-Act-Overview">PDPA</a>, and consent to
+      the collection, use and disclosure of my personal data by DBS for the purposes set
+      out in the Notice.
+    </p>
+    <div class="pdpa">
+      <label for="id_is_pdpa_checked">Yes, I acknowledge and consent: &nbsp;</label><br />
+      <input type="checkbox" name="is_pdpa_checked" required id="id_is_pdpa_checked" onchange="lockReg()">
     </div>
     <p>&nbsp;</p>
     <button id="reg-submit" type="submit">Register</button>
@@ -56,6 +65,23 @@
   </div>
 
   <script>
+    /* Disable registration if PDPA is unchecked */
+    var reg_but = document.getElementById('reg-submit');
+    reg_but.disabled = true;
+    reg_but.style.backgroundColor = "#bbb";
+
+    function lockReg() {
+      var reg_but = document.getElementById('reg-submit');
+      var pdpa = document.getElementById('id_is_pdpa_checked');
+
+      if (pdpa.checked === false) {
+        reg_but.disabled = true;
+        reg_but.style.backgroundColor = "#bbb";
+      } else if (pdpa.checked === true) {
+        reg_but.disabled = false;
+        reg_but.style.backgroundColor = "rgba(255, 51, 51, 1)";
+      }
+    }
 
     /* Validate if Name is provided */
 
@@ -104,7 +130,7 @@
 
 
     valIcon = $('#validateIcon');
-      $('#id_nric_number').keyup(function() {
+      $('#id_nric_number').change(function() {
         var nric_num = $(this).val();
         nric_num = nric_num.replace(/[^0-9 a-z A-Z]+/g, "").replace(/(^\s||\s$)+/, "").toUpperCase();
         $(this).val(nric_num);

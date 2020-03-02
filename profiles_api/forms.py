@@ -5,4 +5,4 @@ class GuestForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('nric_number', 'name', 'company', 'photo',)
+        fields = ('nric_number', 'name', 'company', 'photo', 'is_pdpa_checked')

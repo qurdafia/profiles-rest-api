@@ -18,6 +18,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'company',
             'photo',
             'reg_date',
+            'is_pdpa_checked',
             'password'
         )
         extra_kwargs = {
@@ -37,6 +38,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             company=validated_data['company'],
             photo=validated_data['photo'],
             reg_date=validated_data['registered_date'],
+            is_pdpa_checked=validated_data['is_pdpa_checked'],
             password=validated_data['password']
         )
 
