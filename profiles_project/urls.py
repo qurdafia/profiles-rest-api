@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('profiles_api.urls')),
     path('register/', login_required(views.register_guest), name='register_guest'),
+    path('history/', login_required(views.history), name='history'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

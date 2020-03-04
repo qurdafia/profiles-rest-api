@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load timetags %}
+{% block history %}
+  <h3>Visit History</h3>
+  <br />
+  <p>
+    {% for item in info %}
+      Name: {{ item.person_information.name }}<br />
+      Company: {{ item.person_information.company }}<br />
+      Date: {{ item.person_information.visit_start_timestamp | print_timestamp }}
+      <br /><br />
+    {% endfor %}
+  </p>
+{% endblock %}

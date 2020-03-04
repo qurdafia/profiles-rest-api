@@ -47,6 +47,31 @@ class UserLoginApiView(ObtainAuthToken):
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
+def history(request):
+    url = "https://10.12.201.64:9812/visitors/history"
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJ0bmVyIiwiY3JlYXRlZCI6MTU4MzI4Njg2MzIzOSwibmFtZSI6InBhcnRuZXIiLCJleHAiOjE1ODMzNzMyNjMsImlhdCI6MTU4MzI4Njg2M30.O6B9QUW5Sm9g_cps0JryU7Oqn5rveyRykuUtQebZ7Gs"
+    }
+
+    response = requests.request("GET", url, headers=headers, verify=False)
+
+    history = json.loads(response.text)
+    info = history.get("result", {})
+    print(json.dumps(info, indent=2))
+    # for item in info:
+    #     person = item["person_information"]
+    #     print(type(person))
+    #     # person_name = person["name"]
+    #     # person_company = person["company"]
+    #     # person_visit = person["visit_start_timestamp"]
+
+    context = {'info': info }
+
+    return render(request, 'history.html', context)
+
+
 # Registering a guest
 def register_guest(request):
 
