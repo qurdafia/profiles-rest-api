@@ -59,15 +59,20 @@ def history(request):
 
     history = json.loads(response.text)
     info = history.get("result", {})
-    print(json.dumps(info, indent=2))
-    # for item in info:
-    #     person = item["person_information"]
-    #     print(type(person))
-    #     # person_name = person["name"]
-    #     # person_company = person["company"]
-    #     # person_visit = person["visit_start_timestamp"]
+
+    infoarr = json.dumps(info, indent=2)
+    print(infoarr)
 
     context = {'info': info }
+
+    names = []
+
+    for item in info:
+        name = item['person_information']['name']
+        names.append(name)
+
+    print(names)
+    print(len(names))
 
     return render(request, 'history.html', context)
 

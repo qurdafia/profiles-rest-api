@@ -5,10 +5,13 @@
   <br />
   <p>
     {% for item in info %}
-      Name: {{ item.person_information.name }}<br />
-      Company: {{ item.person_information.company }}<br />
-      Date: {{ item.person_information.visit_start_timestamp | print_timestamp }}
-      <br /><br />
+      <span class="visit-log">
+        Name: <strong>{{ item.person_information.name }}</strong><br />
+        Company: {{ item.person_information.company }}<br />
+        Visited On: {{ item.person_information.visit_start_timestamp | print_timestamp }}<br />
+        Expired On: {{ item.person_information.visit_end_timestamp | print_timestamp }}
+        <br /><br />
+      </span>
     {% endfor %}
   </p>
 {% endblock %}

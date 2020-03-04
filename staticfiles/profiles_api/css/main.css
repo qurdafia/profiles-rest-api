@@ -138,3 +138,11 @@ body {
   content: "✓";
   color: #00ff00;
 }
+
+/* Visit history */
+
+span.visit-log {
+  display: block;
+  border-top: 1px dotted #ccc;
+  padding-top: 10px;
+}
