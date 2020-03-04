@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+  <div id="breadcrumbs-bar">
+    {% if user.is_authenticated %}
+      <a href="{% url 'history' %}">VISIT HISTORY</a> >>
+    {% endif %}
+  </div>
   <h3>Enter guest's information below to register.</h3>
   <br />
   <form id="guest-registration" method="post" enctype="multipart/form-data">
