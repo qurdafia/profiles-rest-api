@@ -73,7 +73,7 @@ def register_guest(request):
 
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJ0bmVyIiwiY3JlYXRlZCI6MTU4MzExMjgyMDcyNywibmFtZSI6InBhcnRuZXIiLCJleHAiOjE1ODMxOTkyMjAsImlhdCI6MTU4MzExMjgyMH0.9jSldPdOGU8gzwPj_cw0CYkU7n8QqeXydhCzmpK6AC8"
+                "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJ0bmVyIiwiY3JlYXRlZCI6MTU4MzI4Njg2MzIzOSwibmFtZSI6InBhcnRuZXIiLCJleHAiOjE1ODMzNzMyNjMsImlhdCI6MTU4MzI4Njg2M30.O6B9QUW5Sm9g_cps0JryU7Oqn5rveyRykuUtQebZ7Gs"
             }
 
             payload = {
