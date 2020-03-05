@@ -83,6 +83,10 @@ body {
   text-align: left;
 }
 
+#breadcrumbs-bar a, #auth-bar a {
+  color: #f33;
+}
+
 #webcam-open-button {
   border-radius: 0 !important;
 }

@@ -22,12 +22,22 @@ import base64
 import os
 import os.path
 
+from profiles_project.secrets import YITU_AUTH
+
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+
+url_visitors = "https://10.12.201.64:9812/visitors"
+url_history = "https://10.12.201.64:9812/visitors/history"
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": YITU_AUTH
+}
 
 # Create your views here.
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -48,14 +58,8 @@ class UserLoginApiView(ObtainAuthToken):
 
 
 def history(request):
-    url = "https://10.12.201.64:9812/visitors/history"
 
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJ0bmVyIiwiY3JlYXRlZCI6MTU4MzI4Njg2MzIzOSwibmFtZSI6InBhcnRuZXIiLCJleHAiOjE1ODMzNzMyNjMsImlhdCI6MTU4MzI4Njg2M30.O6B9QUW5Sm9g_cps0JryU7Oqn5rveyRykuUtQebZ7Gs"
-    }
-
-    response = requests.request("GET", url, headers=headers, verify=False)
+    response = requests.request("GET", url_history, headers=headers, verify=False)
 
     history = json.loads(response.text)
     info = history.get("result", {})
@@ -99,13 +103,6 @@ def register_guest(request):
                 dec_img = enc_img.decode("utf-8")
                 print(dec_img)
 
-            url = "https://10.12.201.64:9812/visitors"
-
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJ0bmVyIiwiY3JlYXRlZCI6MTU4MzI4Njg2MzIzOSwibmFtZSI6InBhcnRuZXIiLCJleHAiOjE1ODMzNzMyNjMsImlhdCI6MTU4MzI4Njg2M30.O6B9QUW5Sm9g_cps0JryU7Oqn5rveyRykuUtQebZ7Gs"
-            }
-
             payload = {
               "visitor_list" : [ {
                 "card_numbers" : [ form_nric ],
@@ -128,7 +125,7 @@ def register_guest(request):
 
             jsonpayload = json.dumps(payload)
 
-            response = requests.request("POST", url, headers=headers, data=jsonpayload, verify=False)
+            response = requests.request("POST", url_visitors, headers=headers, data=jsonpayload, verify=False)
 
             print(response.text)
 
