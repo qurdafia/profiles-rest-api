@@ -2,9 +2,10 @@
 {% block content %}
   <div id="breadcrumbs-bar">
     {% if user.is_authenticated %}
-      <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a> >>
+      <a href="{% url 'search' %}">SEARCH</a> | <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a>
     {% endif %}
   </div>
+
   <h3>Enter visitor's information below to register.</h3>
   <br />
   <form id="guest-registration" method="post" enctype="multipart/form-data">
@@ -26,13 +27,6 @@
       <input style="cursor: pointer !important; padding-top: 0 !important;" type="file" name="photo" id="id_photo" capture="camera" accept="image/*">
     </div>
     <br />
-    <!-- <div class="access-camera-mobile">
-      <label for="id_photo">Photo (mobile):</label><br />
-        <label id="camera-mobile">
-          <span id="camera-glyph" class="glyphicon glyphicon-camera" aria-hidden="true" ></span>
-          <input type="file" name="mobile_photo" id="id_mobile_photo" capture="camera" accept="image/*" />
-        </label>
-    </div> -->
     <p>&nbsp;</p>
     <p>
       I acknowledge that I have read and understood the <a target="_blank" href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/Personal-Data-Protection-Act-Overview">PDPA</a>, and consent to

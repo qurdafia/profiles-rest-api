@@ -48,6 +48,11 @@ input#id_username, input#id_nric_number {
   font-family: 'password';
 }
 
+input#profile-search {
+  font-size: 13px;
+  padding: 10px;
+}
+
 #profile-photo {
   width: 200px;
 }

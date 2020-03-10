@@ -3,7 +3,7 @@
 {% block visitor_list %}
 <div id="breadcrumbs-bar">
   {% if user.is_authenticated %}
-    <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a> >>
+    <a href="{% url 'register_guest' %}">REGISTER</a> >>
   {% endif %}
 </div>
 <h2>Profile</h2>

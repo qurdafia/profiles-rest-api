@@ -3,9 +3,10 @@
 {% block visitor_list %}
 <div id="breadcrumbs-bar">
   {% if user.is_authenticated %}
-    <a href="{% url 'register_guest' %}">REGISTER</a> >>
+    <a href="{% url 'search' %}">SEARCH</a> | <a href="{% url 'register_guest' %}">REGISTER</a>
   {% endif %}
 </div>
+
 <h2>Registered Visitors</h2>
 <p>&nbsp;</p>
 

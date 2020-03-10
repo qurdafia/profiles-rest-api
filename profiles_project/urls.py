@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [
+    path('', login_required(views.search), name='search'),
     path('admin/', admin.site.urls),
     path('api/', include('profiles_api.urls')),
     path('register/', login_required(views.register_guest), name='register_guest'),

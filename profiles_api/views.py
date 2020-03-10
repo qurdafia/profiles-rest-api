@@ -30,6 +30,7 @@ import os
 import os.path
 
 from datetime import datetime
+from django.db.models import Q
 
 from profiles_project.secrets import YITU_AUTH
 
@@ -73,6 +74,13 @@ class VisitorList(ListView):
     context_object_name = 'visitors'
     ordering = ['-reg_date']
     paginate_by = 3
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q', '')
+        object_list = UserProfile.objects.filter(
+            Q(name__icontains=query) | Q(nric_number__icontains=query)
+        )
+        return object_list
 
 
 # Granting access to a registered guest
@@ -148,6 +156,10 @@ class VisitorDetail(DetailView):
         return render(request, 'userprofile.html', {
             'form': form
         })
+
+
+def search(request):
+    return render(request, 'search.html', {})
 
 
 def history(request):
