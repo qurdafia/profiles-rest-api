@@ -2,10 +2,10 @@
 {% block content %}
   <div id="breadcrumbs-bar">
     {% if user.is_authenticated %}
-      <a href="{% url 'history' %}">VISIT HISTORY</a> >>
+      <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a> >>
     {% endif %}
   </div>
-  <h3>Enter guest's information below to register.</h3>
+  <h3>Enter visitor's information below to register.</h3>
   <br />
   <form id="guest-registration" method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -15,7 +15,7 @@
     <input type="text" name="company" maxlength="255" required id="id_company"><br />
     <label for="id_nric_number">Nric / FIN:</label>&nbsp;<div id="validateIcon" class="validateicon"></div><br />
     <input type="text" name="nric_number" maxlength="255" required id="id_nric_number"><br />
-    <label for="id_photo">Photo:</label><br />
+    <label id="access-camera-desktop" for="id_photo">Photo:<br /></label>
     <div class="access-camera">
       <!-- Access the camera -->
       <span id="open-web-cam">Open Camera</span>
@@ -23,8 +23,16 @@
         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
       </button>
       <!-- End of Access Camera -->
-      <input style="cursor: pointer !important; padding-top: 0 !important;" type="file" name="photo" required id="id_photo">
+      <input style="cursor: pointer !important; padding-top: 0 !important;" type="file" name="photo" id="id_photo" capture="camera" accept="image/*">
     </div>
+    <br />
+    <!-- <div class="access-camera-mobile">
+      <label for="id_photo">Photo (mobile):</label><br />
+        <label id="camera-mobile">
+          <span id="camera-glyph" class="glyphicon glyphicon-camera" aria-hidden="true" ></span>
+          <input type="file" name="mobile_photo" id="id_mobile_photo" capture="camera" accept="image/*" />
+        </label>
+    </div> -->
     <p>&nbsp;</p>
     <p>
       I acknowledge that I have read and understood the <a target="_blank" href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/Personal-Data-Protection-Act-Overview">PDPA</a>, and consent to

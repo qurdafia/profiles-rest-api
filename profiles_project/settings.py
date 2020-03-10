@@ -26,7 +26,8 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.12.201.124', 'localhost']
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -104,6 +105,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Django ResizedImageField
+
+DJANGORESIZED_DEFAULT_SIZE = [640, 480]
+DJANGORESIZED_DEFAULT_QUALITY = 75
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

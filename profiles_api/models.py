@@ -3,6 +3,13 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.utils import timezone
 import datetime
 
+from io import BytesIO
+from PIL import Image
+from django.core.files import File
+
+from django_resized import ResizedImageField
+
+
 # Create your models here.
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
@@ -31,6 +38,15 @@ class UserProfileManager(BaseUserManager):
         return user
 
 
+#image compression method
+def compress(image):
+    im = Image.open(image).convert('RGB')
+    im_io = BytesIO()
+    im.save(im_io, 'JPEG', quality=70)
+    new_image = File(im_io, name=image.name)
+    return new_image
+
+
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """DB model for the users"""
     date_format = '%d-%m-%Y %H:%M:%S'
@@ -38,16 +54,24 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     nric_number = models.CharField(max_length=255, default='', unique=True)
     name = models.CharField(max_length=255)
     company = models.CharField(max_length=255, default='')
-    photo = models.FileField(upload_to='photos/', default='')
+    # photo = models.FileField(upload_to='photos/', default='', null=True)
+    photo = ResizedImageField(size=[640, 480], upload_to='photos/', blank=True, null=True, default='')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_pdpa_checked = models.BooleanField(default=False)
     reg_date = models.DateField(default=timezone.now)
+    last_access_date = models.DateField(default=timezone.now)
 
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'nric_number'
     REQUIRED_FIELDS = ['name']
+
+    #calling image compression function before saving the data
+    def save(self, *args, **kwargs):
+                new_image = compress(self.photo)
+                self.photo = new_image
+                super().save(*args, **kwargs)
 
     def get_full_name(self):
         """Get full name of the user"""

@@ -26,6 +26,8 @@ urlpatterns = [
     path('api/', include('profiles_api.urls')),
     path('register/', login_required(views.register_guest), name='register_guest'),
     path('history/', login_required(views.history), name='history'),
+    path('visitors/', login_required(views.VisitorList.as_view()), name='userprofile_list'),
+    path('visitors/<int:pk>/', login_required(views.VisitorDetail.as_view()), name='userprofile'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

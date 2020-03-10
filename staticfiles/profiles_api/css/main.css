@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&display=swap');
+@font-face {
+  font-family: 'password';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/media/fonts/password.ttf');
+}
+
 body {
   background: url('/media/page-background.png');
 }
@@ -14,7 +21,7 @@ body {
   padding-bottom: 50px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   /*font-family: Open Sans;*/
-  font-weight: lighter !important;
+  /*font-weight: lighter !important;*/
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
@@ -36,6 +43,11 @@ body {
   padding-top: 0;
   padding-bottom: 0;
 }
+
+input#id_username {
+  font-family: 'password';
+}
+
 #guest-registration label {
   text-transform: uppercase;
 }
@@ -157,4 +169,87 @@ span.visit-log {
   display: block;
   border-top: 1px dotted #ccc;
   padding-top: 10px;
+}
+
+/* Additional Styling for registration */
+
+input {
+  border-radius: 0 !important;
+}
+.access-camera-mobile {
+  display: inline-block;
+}
+.access-camera-mobile input[type=file] {
+  display: inherit;
+}
+#camera-mobile {
+  display: flex;
+}
+#camera-glyph {
+  padding-top: 12px;
+}
+
+/* .access-camera-mobile {
+  display: none;
+} */
+
+/* iPad */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  {
+  .access-camera-mobile {
+    display: inherit; !important;
+  }
+  #webcam-open-button {
+    display: none;
+  }
+  /* .access-camera, #access-camera-desktop {
+    display: none;
+  } */
+}
+
+/* iPhone X */
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
+  .access-camera-mobile {
+    display: inherit; !important;
+  }
+  #webcam-open-button {
+    display: none;
+  }
+  /* .access-camera, #access-camera-desktop {
+    display: none;
+  } */
+}
+
+/* iPhone + sizes */
+@media only screen
+and (min-device-width : 414px)
+and (max-device-width : 736px) {
+  .access-camera-mobile {
+    display: inherit; !important;
+  }
+  #webcam-open-button {
+    display: none;
+  }
+  /* .access-camera, #access-camera-desktop {
+    display: none;
+  } */
+}
+
+/* iPhone 6, 7, 8 */
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+  .access-camera-mobile {
+    display: inherit; !important;
+  }
+  #webcam-open-button {
+    display: none;
+  }
+  /* .access-camera, #access-camera-desktop {
+    display: none;
+  } */
 }

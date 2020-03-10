@@ -8,6 +8,13 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
+from django.shortcuts import get_object_or_404
+
+from .models import UserProfile
+
 from profiles_api import serializers
 from profiles_api import models
 from profiles_api import permissions
@@ -21,6 +28,8 @@ import json
 import base64
 import os
 import os.path
+
+from datetime import datetime
 
 from profiles_project.secrets import YITU_AUTH
 
@@ -55,6 +64,88 @@ class UserLoginApiView(ObtainAuthToken):
     """Handle user authentication token"""
 
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class VisitorList(ListView):
+
+    template_name = 'userprofile_list.html'
+    queryset = UserProfile.objects.all()
+    context_object_name = 'visitors'
+    ordering = ['-reg_date']
+    paginate_by = 10
+
+
+class VisitorDetail(DetailView):
+
+    template_name = 'userprofile.html'
+    queryset = UserProfile.objects.all()
+    context_object_name = 'visitor'
+
+    def post(self, request, pk=None):
+
+        if request.method == 'POST':
+            form = UserProfile.objects.get(pk=pk)
+
+            form_img = form.photo
+            form_nric = form.nric_number
+            form_name = form.name
+            form_company = form.company
+
+            form_img_url = "/vagrant/media/" + str(form_img)
+
+            last_access = form.last_access_date.strftime("%Y-%m-%d")
+            now_access = datetime.today().strftime("%Y-%m-%d")
+
+            if last_access == now_access:
+                messages.success(request, 'Visitor access in on going')
+                return redirect('userprofile_list')
+            else:
+                form.last_access_date = datetime.today()
+
+                form.save()
+                print(form_name)
+                print(last_access)
+
+                with open(form_img_url, "rb") as file:
+                    enc_img = base64.b64encode(file.read())
+                    dec_img = enc_img.decode("utf-8")
+                    print(dec_img)
+
+                payload = {
+                  "visitor_list" : [ {
+                    "card_numbers" : [ form_nric ],
+                    "face_image_content" : dec_img,
+                    "meta" : {},
+                    "person_information" : {
+                      "company" : form_company,
+                      "identity_number" : form_nric,
+                      "name" : form_name,
+                      "phone" : "",
+                      "remark" : "",
+                      "visit_end_timestamp" : 0,
+                      "visit_start_timestamp" : 0,
+                      "visit_time_type" : 1,
+                      "visitee_name" : ""
+                    },
+                    "tag_id_list" : [ "5e58b6d9e2e6a700014a2b19" ]
+                  } ]
+                }
+
+                jsonpayload = json.dumps(payload)
+
+                response = requests.request("POST", url_visitors, headers=headers, data=jsonpayload, verify=False)
+
+                print(response.text)
+
+                messages.success(request, 'Visitor is allowed to access')
+                return redirect('userprofile_list')
+
+        else:
+            form = GuestForm()
+
+        return render(request, 'userprofile.html', {
+            'form': form
+        })
 
 
 def history(request):

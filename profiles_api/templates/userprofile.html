@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load timetags %}
+{% block visitor_list %}
+<h2>Profile</h2>
+
+  <!-- Display Profile -->
+    <p>
+      Name: {{ visitor.name }}<br />
+      Company: {{ visitor.company }}<br />
+      Date Registered: {{ visitor.reg_date }}
+    </p>
+    <form method='post'>
+       {% csrf_token %}
+       <input name="allow_access" hidden>
+       <input name="pk" value="{{ visitor.pk }}" hidden>
+       <button type="submit" id="reg-submit">Allow Access</button>
+     </form>
+{% endblock %}

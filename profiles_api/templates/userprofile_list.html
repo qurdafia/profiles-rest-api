@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load timetags %}
+{% block visitor_list %}
+<div id="breadcrumbs-bar">
+  {% if user.is_authenticated %}
+    <a href="{% url 'register_guest' %}">REGISTER</a> >>
+  {% endif %}
+</div>
+<h2>Registered Visitors</h2>
+<p>&nbsp;</p>
+
+  <!-- Iterate over object_list -->
+  {% for visitor in visitors %}
+  <!-- Display Objects -->
+    <p>
+      Name: <a href="{% url 'userprofile' visitor.id %}">{{ visitor.name }}</a><br />
+      Company: {{ visitor.company }}<br />
+      Date Registered: {{ visitor.reg_date }}
+    </p>
+  <!-- If objet_list is empty  -->
+  {% empty %}
+    <p>No objects yet.</p>
+  {% endfor %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li id="reg-message-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}
