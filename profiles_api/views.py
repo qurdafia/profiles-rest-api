@@ -69,16 +69,17 @@ class UserLoginApiView(ObtainAuthToken):
 class VisitorList(ListView):
 
     template_name = 'userprofile_list.html'
-    queryset = UserProfile.objects.all()
+    model = UserProfile
     context_object_name = 'visitors'
     ordering = ['-reg_date']
-    paginate_by = 10
+    paginate_by = 3
 
 
+# Granting access to a registered guest
 class VisitorDetail(DetailView):
 
+    model = UserProfile
     template_name = 'userprofile.html'
-    queryset = UserProfile.objects.all()
     context_object_name = 'visitor'
 
     def post(self, request, pk=None):
@@ -102,7 +103,8 @@ class VisitorDetail(DetailView):
             else:
                 form.last_access_date = datetime.today()
 
-                form.save()
+                form.save(update_fields=['last_access_date'])
+
                 print(form_name)
                 print(last_access)
 

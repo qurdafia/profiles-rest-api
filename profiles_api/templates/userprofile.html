@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% load timetags %}
 {% block visitor_list %}
+<div id="breadcrumbs-bar">
+  {% if user.is_authenticated %}
+    <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a> >>
+  {% endif %}
+</div>
 <h2>Profile</h2>
 
   <!-- Display Profile -->
     <p>
-      Name: {{ visitor.name }}<br />
-      Company: {{ visitor.company }}<br />
-      Date Registered: {{ visitor.reg_date }}
+      <img id="profile-photo" src="/media/{{ visitor.photo }}" /><br /><br />
+      <strong>{{ visitor.name }}</strong><br />
+      {{ visitor.company }}<br />
+      Registered: {{ visitor.reg_date }}<br />
+      Last Access Date: {{ visitor.last_access_date }}
     </p>
+    <br />
     <form method='post'>
        {% csrf_token %}
        <input name="allow_access" hidden>

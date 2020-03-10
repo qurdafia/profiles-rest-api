@@ -9,5 +9,6 @@ def print_timestamp(timestamp):
     except ValueError:
         return None
     return datetime.datetime.fromtimestamp(ts)
+    # return datetime.datetime.strftime("%d %b %Y %H:%M:%S")
 
 register.filter(print_timestamp)

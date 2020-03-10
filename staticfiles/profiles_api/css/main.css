@@ -44,10 +44,29 @@ body {
   padding-bottom: 0;
 }
 
-input#id_username {
+input#id_username, input#id_nric_number {
   font-family: 'password';
 }
 
+#profile-photo {
+  width: 200px;
+}
+
+#profile-photo-tn {
+  width: 100%;
+}
+
+#profiles-card {
+  font-size: 10px;
+  background-color: #fff;
+  display: inline-block;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 5px #ddd;
+  width: 32%;
+  height: 200px;
+  padding: 15px;
+  vertical-align: top;
+}
 #guest-registration label {
   text-transform: uppercase;
 }
@@ -252,4 +271,15 @@ and (max-device-width : 667px) {
   /* .access-camera, #access-camera-desktop {
     display: none;
   } */
+}
+
+/* Pagination */
+
+.pagination>.active>span, .pagination>.active>span:hover {
+  background-color: #f33;
+  border: 1px solid #f33;
+}
+
+.pagination>li>a, .pagination>li>a:hover {
+  color: #f33;
 }
