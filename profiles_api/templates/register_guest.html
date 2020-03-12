@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div id="breadcrumbs-bar">
-    {% if user.is_authenticated %}
-      <a href="{% url 'search' %}">SEARCH</a> | <a href="{% url 'userprofile_list' %}">REGISTERED VISITORS</a>
-    {% endif %}
-  </div>
 
   <h3>Enter visitor's information below to register.</h3>
   <br />

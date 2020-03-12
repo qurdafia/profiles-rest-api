@@ -25,6 +25,50 @@
     <div id="vms-description">
       A visitor enrollment system proof of concept by CTC Global Pte Ltd
     </div>
+    <div id="breadcrumbs-bar">
+      {% if user.is_authenticated %}
+        {% if request.get_full_path == "/" %}
+          <span style="display: none;">
+            <a href="{% url 'search' %}">
+              SEARCH >
+            </a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{% url 'search' %}">
+              SEARCH >
+            </a>
+          </span>
+        {% endif %}
+
+        {% if request.get_full_path == "/register/" %}
+          <span style="display: none;">
+            <a href="{% url 'register_guest' %}">
+              REGISTER >
+            </a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{% url 'register_guest' %}">
+              REGISTER >
+            </a>
+          </span>
+        {% endif %}
+        {% if request.get_full_path == "/visitors/" %}
+          <span style="display: none;">
+            <a href="{% url 'userprofile_list' %}">
+              REGISTERED VISITORS >
+            </a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{% url 'userprofile_list' %}">
+              REGISTERED VISITORS >
+            </a>
+          </span>
+        {% endif %}
+      {% endif %}
+    </div>
     {% block login %}
     {% endblock login %}
     {% block content %}

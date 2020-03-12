@@ -50,7 +50,7 @@ input#id_username, input#id_nric_number {
 
 input#profile-search {
   font-size: 13px;
-  padding: 10px;
+  padding: 8px;
 }
 
 #profile-photo {
@@ -81,7 +81,7 @@ input#profile-search {
   margin-bottom: 15px;
   /*border: 1px solid #222;*/
 }
-#reg-submit {
+#reg-submit, #profile-search-button {
   background-color: #f33;
   color: #fff;
   border: 0;

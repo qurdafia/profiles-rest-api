@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 {% load timetags %}
 {% block visitor_list %}
-<div id="breadcrumbs-bar">
-  {% if user.is_authenticated %}
-    <a href="{% url 'search' %}">SEARCH</a> | <a href="{% url 'register_guest' %}">REGISTER</a>
-  {% endif %}
-</div>
 
-<h2>Registered Visitors</h2>
+<h2>Registered Visitor(s)</h2>
 <p>&nbsp;</p>
 
   <!-- Iterate over object_list -->
   {% for visitor in visitors %}
   <!-- Display Objects -->
+
     <p id="profiles-card">
       <a href="{% url 'userprofile' visitor.id %}"><img id="profile-photo-tn" src="/media/{{ visitor.photo }}" /></a><br /><br />
       <strong>{{ visitor.name }}</strong><br />
@@ -20,8 +16,9 @@
     </p>
   <!-- If objet_list is empty  -->
   {% empty %}
-    <p>No objects yet.</p>
-
+    <h4>No such user in the list, click the register button.</h4>
+    <p>&nbsp;</p>
+    <a id="reg-submit" href="{% url 'register_guest' %}">Register</a>
   {% endfor %}
   {% if messages %}
   <ul class="messages">
@@ -30,7 +27,7 @@
       {% endfor %}
   </ul>
   {% endif %}
-
+  <p style="clear: both;">&nbsp;</p>
   {% if is_paginated %}
   <ul class="pagination">
     {% if page_obj.has_previous %}
