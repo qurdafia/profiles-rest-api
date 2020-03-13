@@ -4,6 +4,9 @@
   <h3>Visit History</h3>
   <br />
   <p>
+    <span class="glyphicon glyphicon-save" aria-hidden="true"></span><a href="/media/logs/history.csv">&nbsp;Download CSV File</a>
+  </p>
+  <p>
     {% for item in info %}
       <span class="visit-log">
         Name: <strong>{{ item.person_information.name }}</strong><br />

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block search %}
 <h2>Search for a registered user</h2>
-<p>You can input name or NRIC/FIN number.</p>
+<p>Input name or NRIC/FIN number.</p>
 <br />
 <form action="{% url 'userprofile_list' %}" method="get">
   <input id="profile-search" name="q" type="text" placeholder="Search...">

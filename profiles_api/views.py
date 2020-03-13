@@ -25,6 +25,7 @@ from django.contrib import messages
 
 import requests
 import json
+import pandas as pd
 import base64
 import os
 import os.path
@@ -170,18 +171,31 @@ def history(request):
     info = history.get("result", {})
 
     infoarr = json.dumps(info, indent=2)
-    print(infoarr)
+
+    # print(infoarr)
 
     context = {'info': info }
 
     names = []
+    file = []
 
     for item in info:
         name = item['person_information']['name']
+        inf = item['person_information']
+        file.append(inf)
         names.append(name)
 
-    print(names)
-    print(len(names))
+    outname = 'history.csv'
+    outdir = './media/logs'
+
+    fullname = os.path.join(outdir, outname)
+
+    result = pd.DataFrame(file)
+
+    result.to_csv(fullname, index=False)
+
+    # print(names)
+    # print(len(names))
 
     return render(request, 'history.html', context)
 
