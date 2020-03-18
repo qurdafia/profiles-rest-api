@@ -20,7 +20,6 @@ from django.conf import settings
 from profiles_api import views
 from django.contrib.auth.decorators import login_required
 
-
 urlpatterns = [
     path('', login_required(views.search), name='search'),
     path('admin/', admin.site.urls),

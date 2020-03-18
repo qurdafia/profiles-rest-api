@@ -108,7 +108,7 @@ class VisitorDetail(DetailView):
 
             if last_access == now_access:
                 messages.success(request, 'Visitor access in on going')
-                return redirect('userprofile_list')
+                return redirect('userprofile', pk=pk)
             else:
                 form.last_access_date = datetime.today()
 
@@ -149,7 +149,7 @@ class VisitorDetail(DetailView):
                 print(response.text)
 
                 messages.success(request, 'Visitor is allowed to access')
-                return redirect('userprofile_list')
+                return redirect('userprofile', pk=pk)
 
         else:
             form = GuestForm()
@@ -176,14 +176,21 @@ def history(request):
 
     context = {'info': info }
 
-    names = []
     file = []
 
     for item in info:
         name = item['person_information']['name']
         inf = item['person_information']
         file.append(inf)
-        names.append(name)
+
+    for f in file:
+        t_start = datetime.fromtimestamp(f['visit_start_timestamp'])
+        t_end = datetime.fromtimestamp(f['visit_end_timestamp'])
+        t_check = datetime.fromtimestamp(f['check_out_timestamp'])
+        f['visit_start_timestamp'] = t_start.strftime("%d-%m-%Y %H:%M:%S")
+        f['visit_end_timestamp'] = t_end.strftime("%d-%m-%Y %H:%M:%S")
+        f['check_out_timestamp'] = t_check.strftime("%d-%m-%Y %H:%M:%S")
+
 
     outname = 'history.csv'
     outdir = './media/logs'
@@ -193,9 +200,6 @@ def history(request):
     result = pd.DataFrame(file)
 
     result.to_csv(fullname, index=False)
-
-    # print(names)
-    # print(len(names))
 
     return render(request, 'history.html', context)
 

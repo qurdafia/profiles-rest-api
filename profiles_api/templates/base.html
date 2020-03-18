@@ -67,6 +67,19 @@
             </a>
           </span>
         {% endif %}
+        {% if request.get_full_path == "/history/" %}
+          <span style="display: none;">
+            <a href="{% url 'history' %}">
+              HISTORY >
+            </a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{% url 'history' %}">
+              HISTORY >
+            </a>
+          </span>
+        {% endif %}
       {% endif %}
     </div>
     {% block login %}

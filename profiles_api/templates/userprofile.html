@@ -19,4 +19,11 @@
        <input name="pk" value="{{ visitor.pk }}" hidden>
        <button type="submit" id="reg-submit">Allow Access</button>
      </form>
+     {% if messages %}
+     <ul class="messages">
+         {% for message in messages %}
+         <li id="reg-message-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+         {% endfor %}
+     </ul>
+     {% endif %}
 {% endblock %}

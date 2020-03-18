@@ -10,7 +10,7 @@
   <!-- Display Objects -->
 
     <p id="profiles-card">
-      <a href="{% url 'userprofile' visitor.id %}"><img id="profile-photo-tn" src="/media/{{ visitor.photo }}" /></a><br /><br />
+      <a href="{% url 'userprofile' pk=visitor.id %}"><img id="profile-photo-tn" src="/media/{{ visitor.photo }}" /></a><br /><br />
       <strong>{{ visitor.name }}</strong><br />
       {{ visitor.company }}<br />
     </p>
