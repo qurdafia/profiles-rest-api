@@ -1,0 +1,17 @@
+name,phone,identity_number,company,visitee_name,visit_purpose,visit_time_type,visit_start_timestamp,visit_end_timestamp,check_out_timestamp,remark,success_test
+Joel Amate,,G5437430K,CTC Global Pte Ltd,,,1,18-03-2020 15:31:36,19-03-2020 00:00:00,18-03-2020 23:59:00,,FAILED
+Andrew Ian Lye Faulkner,,S9527713F,CTC Global Pte Ltd,,,1,17-03-2020 13:27:05,18-03-2020 00:00:00,17-03-2020 23:59:00,,PASSED
+Santhoshkumar Subramani,,G3149688N,CTC Global Pte Ltd,,,1,17-03-2020 11:35:11,18-03-2020 00:00:00,17-03-2020 23:59:00,,PASSED
+Kassim Jameel,,S8772314C,CTC Global Pte Ltd,,,1,17-03-2020 10:15:31,18-03-2020 00:00:00,17-03-2020 23:59:00,,PASSED
+Kassim Jameel,,S8772314C,CTC Global Pte Ltd,,,1,12-03-2020 11:26:45,13-03-2020 00:00:00,12-03-2020 23:59:00,,FAILED
+Joel Amate,,G5437430K,CTC Global Pte Ltd,,,1,10-03-2020 16:43:53,11-03-2020 00:00:00,10-03-2020 23:59:00,,PASSED
+Andrew Ian Lye Faulkner,,S9527713F,CTC Global Pte Ltd,,,1,10-03-2020 16:39:04,11-03-2020 00:00:00,10-03-2020 23:59:00,,PASSED
+Roland Abad,,G3087464T,CTC Global Pte Ltd,,,1,10-03-2020 14:41:09,11-03-2020 00:00:00,10-03-2020 23:59:00,,PASSED
+Abhishek Dhoundiyal,,G3067407W,CTC Global Pte Ltd,,,1,10-03-2020 13:51:20,11-03-2020 00:00:00,10-03-2020 23:59:00,,PASSED
+Santhoshkumar Subramani,,G3149688N,CTC Global Pte Ltd,,,1,10-03-2020 13:51:01,11-03-2020 00:00:00,10-03-2020 23:59:00,,PASSED
+Mark Christian Roma,,g5459183m,CTC Global Pte Ltd,,,1,10-03-2020 13:49:48,11-03-2020 00:00:00,10-03-2020 23:59:00,,FAILED
+Andrew Ian Lye Faulkner,,S9527713F,CTC Global Pte Ltd,,,1,09-03-2020 17:06:09,10-03-2020 00:00:00,09-03-2020 23:59:00,,PASSED
+Abhishek Dhoundiyal,,G3067407W,CTC Global Pte Ltd,,,1,09-03-2020 17:05:28,10-03-2020 00:00:00,09-03-2020 23:59:00,,PASSED
+Abhishek Dhoundiyal,,G3067407W,CTC Global Pte Ltd,,,1,05-03-2020 13:39:50,06-03-2020 00:00:00,05-03-2020 23:59:00,,PASSED
+Santhoshkumar Subramani,,G3149688N,CTC Global Pte Ltd,,,1,02-03-2020 14:48:06,03-03-2020 00:00:00,02-03-2020 23:59:00,,PASSED
+Andrew Ian Lye Faulkner,,S9527713F,CTC Global Pte Ltd,,,1,02-03-2020 14:40:28,03-03-2020 00:00:00,02-03-2020 23:59:00,,PASSED

@@ -4,17 +4,38 @@
   <h3>Visit History</h3>
   <br />
   <p>
-    <span class="glyphicon glyphicon-save" aria-hidden="true"></span><a href="/media/logs/history.csv">&nbsp;Download CSV File</a>
+    <span class="glyphicon glyphicon-save" aria-hidden="true"></span><a href="/media/logs/history_log.csv">&nbsp;Download CSV File</a>
   </p>
   <p>
     {% for item in info %}
       <span class="visit-log">
         Name: <strong>{{ item.person_information.name }}</strong><br />
         Company: {{ item.person_information.company }}<br />
-        Visited On: {{ item.person_information.visit_start_timestamp | print_timestamp }}<br />
-        Expired On: {{ item.person_information.visit_end_timestamp | print_timestamp }}
+        Visited On: {{ item.person_information.visit_start_timestamp }}<br />
+        Expired On: {{ item.person_information.visit_end_timestamp }}
         <br /><br />
       </span>
     {% endfor %}
   </p>
+  {% if info.has_other_pages %}
+  <ul class="pagination">
+    {% if info.has_previous %}
+      <li><a href="?page={{ info.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in info.paginator.page_range %}
+      {% if info.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if info.has_next %}
+      <li><a href="?page={{ info.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  {% endif %}
 {% endblock %}

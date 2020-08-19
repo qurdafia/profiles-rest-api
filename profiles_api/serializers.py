@@ -15,6 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'id',
             'nric_number',
             'name',
+            'mobile_number',
             'company',
             'photo',
             'reg_date',

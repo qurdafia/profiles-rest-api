@@ -54,6 +54,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     nric_number = models.CharField(max_length=255, default='', unique=True)
     name = models.CharField(max_length=255)
     company = models.CharField(max_length=255, default='')
+    mobile_number = models.CharField(max_length=255, default='')
     # photo = models.FileField(upload_to='photos/', default='', null=True)
     photo = ResizedImageField(size=[640, 480], upload_to='photos/', blank=True, null=True, default='')
     is_active = models.BooleanField(default=True)

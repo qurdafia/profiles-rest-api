@@ -62,6 +62,43 @@ function validate(ic) {
 }
 
 
+// Validate if aphonumeric only
+function isAlphaNumeric(str) {
+  var code, i, len;
+
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123) && // lower alpha (a-z)
+        (code !== "")) { // check if not empty
+      return false;
+    }
+  }
+  return true;
+};
+
+// Validation which includes passport
+
+valIcon = $('#validateIcon');
+  $('#id_nric_number').change(function() {
+    var nric_num = $(this).val();
+    nric_num = nric_num.toUpperCase();
+    $(this).val(nric_num);
+    valIcon.removeClass("valid").attr("title", "Not Valid!");
+    if (isAlphaNumeric(nric_num)) {
+       valIcon.addClass("valid").attr("title", "Valid!");
+    } else {
+      alert('Invalid NRIC/FIN, must provide a correct one.');
+      $(this).val("");
+    }
+  }).click(function() {
+    $(this).select();
+  });
+
+
+// NRIC and FIN Validation
+/*
 valIcon = $('#validateIcon');
   $('#id_nric_number').change(function() {
     var nric_num = $(this).val();
@@ -77,3 +114,4 @@ valIcon = $('#validateIcon');
   }).click(function() {
     $(this).select();
   });
+*/
